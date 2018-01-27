@@ -20,10 +20,11 @@ public class InteractionManager : MonoBehaviour {
     if (activeDiseaseIndex > -1 && Input.GetMouseButtonUp(0)) {
       GameObject obj = GameObject.Find("Helper").GetComponent<Helper>().GetObjectFromMousePosition();
       if (obj) {
-      if (activeDiseaseIndex == 0)
-          obj.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
-        else if (activeDiseaseIndex == 1)
+        Camera.main.GetComponent<cameraController>().Shake();
+        if (activeDiseaseIndex == 0)
           obj.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
+        else if (activeDiseaseIndex == 1)
+          obj.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.yellow);
       }
 
       activeDiseaseIndex = -1;
