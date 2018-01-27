@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Helper : MonoBehaviour {
 
-  [Header("Mouse Sprite")]
-  public SpriteRenderer spriteRenderer;
+  public Image mouseImageUI;
 
 	// Use this for initialization
 	void Start () {
@@ -29,20 +29,21 @@ public class Helper : MonoBehaviour {
     Vector3 pos = Input.mousePosition;
     pos.z = 10;
     pos = Camera.main.ScreenToWorldPoint(pos);
+    pos.z = 0;
     return pos;
   }
 
   // Make the sprite following current mouse position
   public void AttachSpriteToMousePosition(Sprite sprite) {
-    spriteRenderer.sprite = sprite;
+    mouseImageUI.enabled = true;
+    mouseImageUI.sprite = sprite;
 
-    Vector3 pos = GetCurrentMousePositionInWorld();
-    spriteRenderer.transform.position = pos;
+    mouseImageUI.transform.position = Input.mousePosition;
   }
 
   // Detach the sprite from current mouse position
   public void DettachSpriteFromMousePosition() {
-    spriteRenderer.sprite = null;
-    spriteRenderer.transform.position = Vector3.zero;
+    mouseImageUI.enabled = false;
+    mouseImageUI.sprite = null;
   }
 }
