@@ -6,7 +6,7 @@ public class cameraController : MonoBehaviour
 {
 	private Vector3 tempPos;
 	public GameObject planet;
-	private float distanceBetweenPlanetCamera;
+	private float distanceBetweenPlanetCamera = 1;
 
 	public float dragSpeed=0.05f;			//0.25
 	public float scrollSpeed=2f;		//2
@@ -28,14 +28,23 @@ public class cameraController : MonoBehaviour
 
 	void Update()
 	{
-		tempPos.z += Input.GetAxis("Mouse ScrollWheel");
-		distanceBetweenPlanetCamera = planet.transform.position.z - this.transform.position.z;
+    float mouseScrollAxis = Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
+    float newPositionZ = tempPos.z + mouseScrollAxis;
+    if (newPositionZ >= minZ && newPositionZ <= maxZ)
+		  tempPos.z = newPositionZ;
+		//distanceBetweenPlanetCamera = planet.transform.position.z - this.transform.position.z;
 
 		if (Input.GetMouseButton(2))
 		{
 
-			tempPos.x -= Input.GetAxis("Mouse X") * dragSpeed * distanceBetweenPlanetCamera;
-			tempPos.y -= Input.GetAxis("Mouse Y") * dragSpeed * distanceBetweenPlanetCamera;
+      float axisX = Input.GetAxis("Mouse X");
+      float axisY = Input.GetAxis("Mouse Y");
+      float newPositionX = tempPos.x - axisX * dragSpeed * distanceBetweenPlanetCamera;
+      float newPositionY = tempPos.y - axisY * dragSpeed * distanceBetweenPlanetCamera;
+      if (newPositionX >= -limitX && newPositionX <= limitX && newPositionY >= -limitY && newPositionY <= limitY) {
+  			tempPos.x = newPositionX;
+  			tempPos.y = newPositionY;
+      }
 
 		}
 
@@ -45,10 +54,10 @@ public class cameraController : MonoBehaviour
 			Mathf.Clamp(tempPos.z,minZ,maxZ));
 
 		//shake
-		if (Input.GetKey("space"))
+		/*if (Input.GetKey("space"))
 		{
 			shake = 0.5f;
-		}
+		}*/
 
 		if (shake > 0) {
 			newPosition += Random.insideUnitSphere * shake * 10;
@@ -60,4 +69,8 @@ public class cameraController : MonoBehaviour
 
     transform.position = Vector3.Lerp(transform.position, newPosition, delay);
 	}
+
+  public void Shake() {
+    shake = 0.5f;
+  }
 }
