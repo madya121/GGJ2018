@@ -11,6 +11,8 @@ public class HoverPlanet : MonoBehaviour
 	public Text textDisplay;
 	private bool isVisible = false;
 
+  public Animator animator;
+
 
 	// Use this for initialization
 
@@ -18,29 +20,35 @@ public class HoverPlanet : MonoBehaviour
 	void Start ()
 	{
 //		textDisplay = GameObject.Find("Text").GetComponent<Text>();
-		textDisplay.color = Color.clear;
+		//textDisplay.color = Color.clear;
 	}
 
 	// Update is called once per frame
 	void Update () {
-    Debug.Log(isVisible);
 		if (isVisible)
 		{
-			textDisplay.color = Color.white;
+			// textDisplay.color = Color.white;
 		}
 		else
 		{
-			textDisplay.color = Color.clear;
+			// textDisplay.color = Color.clear;
+
 		}
 	}
 
 	void OnMouseOver()
 	{
+    if (isVisible)
+      return;
+    animator.SetTrigger("Open");
 		isVisible = true;
 	}
 
 	private void OnMouseExit()
 	{
+    if (!isVisible)
+      return;
+    animator.SetTrigger("Close");
 		isVisible = false;
 	}
 
