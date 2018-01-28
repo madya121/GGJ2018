@@ -16,14 +16,14 @@ public class StatArc : MonoBehaviour {
         radius = 0.65f;
 
         planetRadius = planet.GetComponent<SphereCollider>().bounds.size.x;
-        growth.GetComponent<LineRenderer>().widthMultiplier = Mathf.Max(1, planetRadius / 12);
+        growth.GetComponent<LineRenderer>().widthMultiplier = Mathf.Max(0.25f, planetRadius / 12);
         decline.GetComponent<LineRenderer>().widthMultiplier = Mathf.Max(0.25f, planetRadius / 12);
     }
 
     // Update is called once per frame
     void Update()
     {
-        int lastGrowthPercent = -25;  // Percent change from last tick
+        int lastGrowthPercent = 25;  // Percent change from last tick
 
         if (lastGrowthPercent >= 0)
         {
