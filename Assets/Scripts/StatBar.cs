@@ -22,9 +22,10 @@ public class StatBar : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        float popPercent = (float)(planet.planetData.Population / planet.planetData.MaxPopulation);
-        float infPercent = (float)(planet.planetData.InfectedPopulation / planet.planetData.MaxPopulation);
+        float pop = planet.planetData.Population;
+        float popPercent = ((float)planet.planetData.Population / planet.planetData.MaxPopulation);
+        float infPercent = ((float)planet.planetData.InfectedPopulation / planet.planetData.MaxPopulation);
         red.transform.localScale = new Vector3(0, 0, infPercent);
-        green.transform.localScale = new Vector3(0, 0, popPercent);        
+        green.transform.localScale = new Vector3(0, 0, popPercent);
 	}
 }
