@@ -7,7 +7,6 @@ public class StatBar : MonoBehaviour {
 
     public GameObject navy, green, red;
     private Planet planet;
-
     double radius;
 
     // Use this for initialization
@@ -26,14 +25,6 @@ public class StatBar : MonoBehaviour {
         float popPercent = (float)(planet.planetData.Population / planet.planetData.MaxPopulation);
         float infPercent = (float)(planet.planetData.InfectedPopulation / planet.planetData.MaxPopulation);
         red.transform.localScale = new Vector3(0, 0, infPercent);
-        green.transform.localScale = new Vector3(0, 0, popPercent);
-
-        //double width = red.GetComponent<Renderer>().bounds.size.x;
-        if (Input.GetKeyDown("z"))
-        {
-            Debug.Log("Planet " + this.name + " radius: " + radius);
-        }
-
-        
+        green.transform.localScale = new Vector3(0, 0, popPercent);        
 	}
 }
