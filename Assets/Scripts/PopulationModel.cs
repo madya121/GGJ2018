@@ -39,11 +39,15 @@ public class PlanetData
     private double birthRate;
     private double infectedPopulation;
     private double deaths;
+    private double lastPopulation;
+    private double percentPopulationChange;
     private VirusData virusData;
 
     public PlanetData(double initialPopulation, double maxPopulation, double birthRate)
     {
         this.population = initialPopulation;
+        this.lastPopulation = initialPopulation;
+        this.percentPopulationChange = 0;
         this.maxPopulation = maxPopulation;
         this.birthRate = birthRate;
     }
@@ -80,6 +84,14 @@ public class PlanetData
         }
     }
 
+    public double LastGrowthPercent
+    {
+        get
+        {
+            return percentPopulationChange;
+        }
+    }
+
     public void AddVirus(VirusData newVirus, double initialInfections)
     {
         this.virusData = newVirus;
@@ -106,15 +118,22 @@ public class PlanetData
             }
         }
 
-        Debug.Log("Population: " + population);
-        Debug.Log("Infected: " + infectedPopulation);
-        Debug.Log("Dead: " + deaths);
-
         // Zero out <1 population
         if (this.population < 1)
         {
             this.population = 0;
             this.infectedPopulation = 0;
         }
+
+        //Debug.Log("Last: " + lastPopulation);
+        //Debug.Log("current: " + population);
+        //Debug.Log("Change: " + LastGrowthPercent);
+
+        if (lastPopulation > 0)
+        {
+            double percent = 100 * (population - lastPopulation) / lastPopulation;
+            percentPopulationChange = percent;
+        }
+        lastPopulation = population;
     }
 }

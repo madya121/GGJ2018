@@ -22,7 +22,6 @@ public class HoverCanvas : MonoBehaviour
 	void Start()
 	{
         planet = transform.parent.gameObject.GetComponent<Planet>();
-
     }
 
 	void Update()
@@ -30,10 +29,11 @@ public class HoverCanvas : MonoBehaviour
         population = planet.planetData.Population;
         infected = planet.planetData.InfectedPopulation;
         death = planet.planetData.Deaths;
+        rateOfChange = (int)planet.planetData.LastGrowthPercent;
 
         textString = "Parasites: " + population +
 		             "\n Infected: " + infected +
-		             "\n Growth Rate: " + rateOfChange +
+		             "\n Growth Rate: " + rateOfChange + "%" +
 		             "\n Eliminated: " + death;
 
 

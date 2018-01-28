@@ -23,17 +23,17 @@ public class StatArc : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        int lastGrowthPercent = 25;  // Percent change from last tick
-
+        double lastGrowthPercent = planet.planetData.LastGrowthPercent;  // Percent change from last tick
+        Debug.Log("change: " + lastGrowthPercent);
         if (lastGrowthPercent >= 0)
         {
-            lastGrowthPercent = Mathf.Min(lastGrowthPercent, 100);
-            growth.GetComponent<Arc>().DrawArc(offset, lastGrowthPercent * 180f / 100, radius);
+            lastGrowthPercent = Mathf.Min((float)lastGrowthPercent, 100);
+            growth.GetComponent<Arc>().DrawArc(offset, (float)lastGrowthPercent * 180f / 100, radius);
         }
         else
         {
-            lastGrowthPercent = Mathf.Max(lastGrowthPercent, -100);
-            decline.GetComponent<Arc>().DrawArc(offset, lastGrowthPercent * 180f / 100, radius);
+            lastGrowthPercent = Mathf.Max((float)lastGrowthPercent, -100);
+            decline.GetComponent<Arc>().DrawArc(offset, (float)lastGrowthPercent * 180f / 100, radius);
         }
     }
 }
