@@ -9,6 +9,9 @@ public class Planet : MonoBehaviour {
     public double birthRate;
     public PlanetData planetData;
 
+    private float timeNeeded = 0.1f;
+    private float timer = 0.1f;
+
     // Use this for initialization
     void Start () {
         planetData = new PlanetData(initialPopulation, maxPopulation, birthRate);
@@ -17,9 +20,14 @@ public class Planet : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+      timer -= Time.deltaTime;
+        /*if (Input.GetKeyDown("space"))
         {
             planetData.Step();
-        }
+        }*/
+      if (timer < 0) {
+        timer = timeNeeded;
+        planetData.Step();
+      }
     }
 }
