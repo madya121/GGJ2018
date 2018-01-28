@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class DiseaseUI : MonoBehaviour, IPointerDownHandler
 {
+    private AudioSource fxSound;
 
     [Header("Disease Information")]
     public int diseaseIndex;
@@ -17,6 +18,7 @@ public class DiseaseUI : MonoBehaviour, IPointerDownHandler
     void Start()
     {
         virus = GetComponent<Virus>();
+        fxSound = GetComponent<AudioSource> ();
     }
 
     // Update is called once per frame
@@ -30,5 +32,6 @@ public class DiseaseUI : MonoBehaviour, IPointerDownHandler
         script.activeDiseaseIndex = diseaseIndex;
         script.diseaseImage = diseaseImage;
         script.virus = virus;
+        fxSound.Play ();
     }
 }

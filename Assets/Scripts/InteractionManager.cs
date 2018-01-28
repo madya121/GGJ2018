@@ -12,10 +12,14 @@ public class InteractionManager : MonoBehaviour
     public Sprite diseaseImage;
     public Virus virus;
 
+    private AudioSource fxSound;
+
+    public Color red, yellow;
+
     // Use this for initialization
     void Start()
     {
-
+      fxSound = GetComponent<AudioSource> ();
     }
 
     // Update is called once per frame
@@ -29,16 +33,18 @@ public class InteractionManager : MonoBehaviour
                 Camera.main.GetComponent<cameraController>().Shake();
                 if (activeDiseaseIndex == 0)
                 {
-                    obj.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
+                    obj.GetComponent<MeshRenderer>().material.SetColor("_Color", red);
                     obj.GetComponent<Planet>().planetData.AddVirus(virus.virusData, 10);
                     Debug.Log("Infected " + obj.name);
                 }
                 else if (activeDiseaseIndex == 1)
                 {
-                    obj.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.yellow);
+                    obj.GetComponent<MeshRenderer>().material.SetColor("_Color", yellow);
                     obj.GetComponent<Planet>().planetData.AddVirus(virus.virusData, 10);
                     Debug.Log("Infected " + obj.name);
                 }
+
+                fxSound.Play ();
             }
 
             activeDiseaseIndex = -1;

@@ -18,6 +18,15 @@ public class GameManager : MonoBehaviour {
   [HideInInspector]
   public bool isGameOver = false;
 
+  public Planet planet1;
+  public Planet planet2;
+  public Planet planet3;
+  public Planet planet4;
+  public Planet planet5;
+  public Planet planet6;
+
+  private float delay = 3.0f;
+
 	// Use this for initialization
 	void Start () {
 
@@ -49,10 +58,22 @@ public class GameManager : MonoBehaviour {
       secondPassed = 1.0f;
       timeTextAnimator.SetTrigger("Boom");
     }
+    if (delay <= 0)
+      checkWin();
+
+    delay -= Time.deltaTime;
+    if (delay < 0)
+      delay = 0;
 	}
 
   public void OnPlayAgain() {
     // Debug.Log("Play Again");
     Application.LoadLevel(Application.loadedLevel);
+  }
+
+  void checkWin() {
+    int total = planet1.planetData.Population + planet2.planetData.Population + planet3.planetData.Population + planet4.planetData.Population + planet5.planetData.Population + planet6.planetData.Population;
+    if (total <= 0)
+      Application.LoadLevel("Win Scene");
   }
 }
