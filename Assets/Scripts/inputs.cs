@@ -5,8 +5,8 @@ using UnityEngine;
 public class inputs : MonoBehaviour
 {
     public PlanetData myPlanet = new PlanetData(1, 1000, 0.1);
-    public Virus weakVirus = new Virus(0.1, 0.0);
-    public Virus strongVirus = new Virus(0.25, 0.5);
+    public VirusData weakVirus = new VirusData(0.1, 0.0);
+    public VirusData strongVirus = new VirusData(0.25, 0.5);
 
     private void Start()
     {
