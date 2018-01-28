@@ -27,13 +27,13 @@ public class StatArc : MonoBehaviour {
         Debug.Log("change: " + lastGrowthPercent);
         if (lastGrowthPercent >= 0)
         {
-            lastGrowthPercent = Mathf.Min((float)lastGrowthPercent, 100);
-            growth.GetComponent<Arc>().DrawArc(offset, (float)lastGrowthPercent * 180f / 100, radius);
+            lastGrowthPercent = Mathf.Min((float)lastGrowthPercent, 25);
+            growth.GetComponent<Arc>().DrawArc(offset, (float)lastGrowthPercent * 180f / 25, radius);
         }
         else
         {
-            lastGrowthPercent = Mathf.Max((float)lastGrowthPercent, -100);
-            decline.GetComponent<Arc>().DrawArc(offset, (float)lastGrowthPercent * 180f / 100, radius);
+            lastGrowthPercent = Mathf.Max((float)lastGrowthPercent, -25);
+            decline.GetComponent<Arc>().DrawArc(offset, (float)lastGrowthPercent * 180f / 25, radius);
         }
     }
 }
