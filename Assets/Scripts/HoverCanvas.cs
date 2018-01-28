@@ -9,11 +9,11 @@ public class HoverCanvas : MonoBehaviour
 
 	private Quaternion rotation;
 	public Text textObj;
-
-	public int population;
-	public int infected;
-	public int rateOfChange;
-	public int death;
+    private Planet planet;
+	private int population;
+	private int infected;
+	private int rateOfChange;
+	private int death;
 
 
 	private String textString;
@@ -21,15 +21,20 @@ public class HoverCanvas : MonoBehaviour
 
 	void Start()
 	{
+        planet = transform.parent.gameObject.GetComponent<Planet>();
 
-	}
+    }
 
 	void Update()
 	{
-		textString = "Population: " + population +
+        population = planet.planetData.Population;
+        infected = planet.planetData.InfectedPopulation;
+        death = planet.planetData.Deaths;
+
+        textString = "Parasites: " + population +
 		             "\n Infected: " + infected +
-		             "\n Rate: " + rateOfChange +
-		             "\n Death: " + death;
+		             "\n Growth Rate: " + rateOfChange +
+		             "\n Eliminated: " + death;
 
 
 		textObj.text = textString;
